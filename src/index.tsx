@@ -17,6 +17,12 @@ const TidyposTerminal = NativeModules.TidyposTerminal
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return TidyposTerminal.multiply(a, b);
+function test(params: any): Promise<any>{
+  return TidyposTerminal.test(params);
 }
+
+function startPayment(credentials: string, params: any): Promise<any>{
+  return TidyposTerminal.startPayment(credentials, params);
+};
+
+export default {startPayment, test};
