@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import TidyposTerminal from 'react-native-tidypos-terminal';
 
-import { CREDENTIALS } from './Constants';
+import { CREDENTIALS } from './constants';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -34,13 +34,18 @@ const App = () => {
       transactionCode: '0000000001', // (mandatory) unique reference number from POS system to prevent duplicate transactions
       amount,
     };
+
+    setLoading(true);
+
     TidyposTerminal.startPayment(CREDENTIALS, params)
       .then((data) => {
         console.log('TidyposTerminal.startPayment() success', data);
+        setLoading(false);
         alert(JSON.stringify(data));
       })
       .catch((err) => {
         console.log('TidyposTerminal.startPayment() error', err);
+        setLoading(false);
         alert(JSON.stringify(err));
       });
   };
