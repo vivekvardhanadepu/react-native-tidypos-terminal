@@ -11,11 +11,19 @@ npm install react-native-tidypos-terminal
 ## Usage
 
 ```js
-import { multiply } from "react-native-tidypos-terminal";
+import TidyposTerminal from "react-native-tidypos-terminal";
 
 // ...
 
-const result = await multiply(3, 7);
+TidyposTerminal.startPayment(extras, params)
+    .then((data) => {
+        // ...
+        console.log('success', data);
+    })
+    .catch((err) => {
+        // ...
+        console.log('error', err);
+    });
 ```
 
 ## Contributing

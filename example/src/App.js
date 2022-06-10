@@ -38,12 +38,12 @@ const App = () => {
         amount,
       },
     };
-    TidyposTerminal.startPayment(extras.params)
+    TidyposTerminal.startPayment(extras, params)
       .then((data) => {
-        console.log('TidyposTerminal.test() success', data);
+        console.log('TidyposTerminal.startPayment() success', data);
       })
       .catch((err) => {
-        console.log('TidyposTerminal.test() error', err);
+        console.log('TidyposTerminal.startPayment() error', err);
       });
   };
 
