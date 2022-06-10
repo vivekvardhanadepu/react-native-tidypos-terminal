@@ -15,7 +15,7 @@ import TidyposTerminal from "react-native-tidypos-terminal";
 
 // ...
 
-TidyposTerminal.startPayment(extras, params)
+TidyposTerminal.startPayment(credentials, params)
     .then((data) => {
         // ...
         console.log('success', data);
@@ -25,6 +25,10 @@ TidyposTerminal.startPayment(extras, params)
         console.log('error', err);
     });
 ```
+
+## Example
+1. Place your credentials in [example/src/constants.ts]
+2. `yarn example android`
 
 ## Contributing
 
