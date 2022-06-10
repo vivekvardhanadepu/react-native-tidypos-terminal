@@ -124,7 +124,7 @@ public class TidyposTerminalModule extends ReactContextBaseJavaModule {
 
       if (intentPromise != null) {
         if (requestCode == REQUEST_CODE) {
-          if (resultCode != RESULT_OK) {
+          if (resultCode == RESULT_OK) {
             intentPromise.resolve(toWritableMap(intent.getSerializableExtra(RESPONSE)));
           }else{
             intentPromise.reject("failed", "payment failed");

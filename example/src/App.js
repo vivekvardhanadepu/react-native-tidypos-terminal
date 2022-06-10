@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
-  SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -10,40 +9,39 @@ import {
 } from 'react-native';
 import TidyposTerminal from 'react-native-tidypos-terminal';
 
+import { CREDENTIALS } from './Constants';
+
 const App = () => {
-  const TERMINAL_APP_PATH = 'com.tidypos.terminal';
-  const CREDENTIALS = '<your credentials>';
   const [loading, setLoading] = useState(false);
   const [amount, changeAmount] = useState('');
 
   const charge = () => {
     console.log('Charging ' + amount + ' cents');
-    const extras = {
-      credentials: CREDENTIALS,
-      params: {
-        partialAuthorizationPolicy: 'N',
-        receiptMode: 'P',
-        requestType: 'sale',
-        transactionIndustryType: 'RS',
-        holderName: 'John Doe',
-        transactionInternalCode: 'P',
-        transactionOriginCode: '',
-        memo: 'xyz',
-        customerAccountCode: '2001',
-        customerAccountInternalCode: 'abc',
-        userCode: 'P',
-        taxAmount: '100',
-        tipRecipientCode: '2001',
-        transactionCode: '0000000001', // (mandatory) unique reference number from POS system to prevent duplicate transactions
-        amount,
-      },
+    const params = {
+      partialAuthorizationPolicy: 'N',
+      receiptMode: 'P',
+      requestType: 'sale',
+      transactionIndustryType: 'RS',
+      holderName: 'John Doe',
+      transactionInternalCode: 'P',
+      transactionOriginCode: '',
+      memo: 'xyz',
+      customerAccountCode: '2001',
+      customerAccountInternalCode: 'abc',
+      userCode: 'P',
+      taxAmount: '100',
+      tipRecipientCode: '2001',
+      transactionCode: '0000000001', // (mandatory) unique reference number from POS system to prevent duplicate transactions
+      amount,
     };
-    TidyposTerminal.startPayment(extras, params)
+    TidyposTerminal.startPayment(CREDENTIALS, params)
       .then((data) => {
         console.log('TidyposTerminal.startPayment() success', data);
+        alert(JSON.stringify(data));
       })
       .catch((err) => {
         console.log('TidyposTerminal.startPayment() error', err);
+        alert(JSON.stringify(err));
       });
   };
 
@@ -59,7 +57,7 @@ const App = () => {
       ) : (
         <View>
           <Text style={styles.headerText}>tidypos Payment</Text>
-          <View style={[styles.flexRow, {marginTop: 20}]}>
+          <View style={[styles.flexRow, { marginTop: 20 }]}>
             <TextInput
               style={styles.input}
               value={amount}
