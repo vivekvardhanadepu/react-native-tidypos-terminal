@@ -17,12 +17,21 @@ const TidyposTerminal = NativeModules.TidyposTerminal
       }
     );
 
+function convertToString(params: any): any {
+  for (let key in params) {
+    if (params[key] !== null && params[key] !== undefined) {
+      params[key] = String(params[key]);
+    }
+  }
+  return params;
+}
+
 function test(params: any): Promise<any> {
-  return TidyposTerminal.test(params);
+  return TidyposTerminal.test(convertToString(params));
 }
 
 function startPayment(credentials: string, params: any): Promise<any> {
-  return TidyposTerminal.startPayment(credentials, params);
+  return TidyposTerminal.startPayment(credentials, convertToString(params));
 }
 
 export default { startPayment, test };

@@ -88,6 +88,7 @@ public class TidyposTerminalModule extends ReactContextBaseJavaModule {
       parseParams(credentials, params, intent);
     } catch(Exception e){
       intentPromise.reject("Failed", "params parsing error");
+      return;
     }
 
     intent.setFlags(0);
